@@ -68,6 +68,7 @@ static DWORD WINAPI ThreadforKeyGet(LPVOID lpParam)
 #include <signal.h>
 #include <termios.h> /* for tcxxxattr, ECHO, etc */
 #include <unistd.h> /* for STDIN_FILENO */
+#include <drivers/serial.h>
 
 static void * ThreadforKeyGet(void * lpParam);
 static pthread_t OSKey_Thread;

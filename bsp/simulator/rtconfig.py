@@ -1,37 +1,37 @@
 import os
 
 # toolchains options
-ARCH='sim'
+ARCH = 'sim'
 #CROSS_TOOL='msvc' or 'gcc' or 'mingw'
 #'msvc' and 'mingw' are both for windows
 # 'gcc' is for linux
-CROSS_TOOL='mingw'
+CROSS_TOOL = 'gcc'
 
 if os.getenv('RTT_CC'):
-	CROSS_TOOL = os.getenv('RTT_CC')
+    CROSS_TOOL = os.getenv('RTT_CC')
 
 # cross_tool provides the cross compiler
-# EXEC_PATH is the compiler execute path 
-if  CROSS_TOOL == 'gcc' or CROSS_TOOL == 'clang-analyze':
-    CPU       = 'posix'
-    PLATFORM  = 'gcc'
+# EXEC_PATH is the compiler execute path
+if CROSS_TOOL == 'gcc' or CROSS_TOOL == 'clang-analyze':
+    CPU = 'posix'
+    PLATFORM = 'gcc'
     EXEC_PATH = ''
 
-elif  CROSS_TOOL == 'mingw':
-    CPU       = 'win32'
-    PLATFORM  = 'mingw'
+elif CROSS_TOOL == 'mingw':
+    CPU = 'win32'
+    PLATFORM = 'mingw'
     EXEC_PATH = r'D:\Program Files\CodeBlocks\MinGW\bin'
 
-elif  CROSS_TOOL == 'msvc':
-    CPU       = 'win32'
-    PLATFORM  = 'cl'
+elif CROSS_TOOL == 'msvc':
+    CPU = 'win32'
+    PLATFORM = 'cl'
     EXEC_PATH = ''
 else:
     print "bad CROSS TOOL!"
     exit(1)
 
 if os.getenv('RTT_EXEC_PATH'):
-	EXEC_PATH = os.getenv('RTT_EXEC_PATH')
+    EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
 BUILD = 'debug'
 #BUILD = ''
@@ -49,7 +49,7 @@ if PLATFORM == 'gcc':
     OBJCPY = PREFIX + 'objcopy'
 
     DEVICE = ' -ffunction-sections -fdata-sections'
-    DEVICE = '  '
+    DEVICE = ' -m32 '
     CFLAGS = DEVICE + ' -I/usr/include -w -D_REENTRANT'
     AFLAGS = ' -c' + DEVICE + ' -x assembler-with-cpp'
     #LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rtthread-linux.map -lpthread'
@@ -69,11 +69,11 @@ if PLATFORM == 'gcc':
 elif PLATFORM == 'mingw':
     # toolchains
     PREFIX = ''
-    CC      = PREFIX + 'gcc'
-    CXX     = PREFIX + 'g++'
-    AS      = PREFIX + 'gcc'
-    AR      = PREFIX + 'ar'
-    LINK    = PREFIX + 'g++'
+    CC = PREFIX + 'gcc'
+    CXX = PREFIX + 'g++'
+    AS = PREFIX + 'gcc'
+    AR = PREFIX + 'ar'
+    LINK = PREFIX + 'g++'
     TARGET_EXT = 'exe'
     SIZE = PREFIX + 'size'
     OBJDUMP = PREFIX + 'objdump'

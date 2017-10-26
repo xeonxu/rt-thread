@@ -1,28 +1,30 @@
 import os
 
 # toolchains options
-ARCH='arm'
-CPU='cortex-m3'
-CROSS_TOOL='keil'
+ARCH = 'arm'
+CPU = 'cortex-m3'
+CROSS_TOOL = 'gcc'
 
 if os.getenv('RTT_CC'):
-	CROSS_TOOL = os.getenv('RTT_CC')
+    CROSS_TOOL = os.getenv('RTT_CC')
 
 # cross_tool provides the cross compiler
-# EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
+# EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil
+# MDK, IAR
 
-if  CROSS_TOOL == 'gcc':
-	PLATFORM 	= 'gcc'
-	EXEC_PATH 	= 'E:/Program Files/CodeSourcery/Sourcery G++ Lite/bin'
+if CROSS_TOOL == 'gcc':
+    PLATFORM = 'gcc'
+    # EXEC_PATH 	= 'E:/Program Files/CodeSourcery/Sourcery G++ Lite/bin'
+    EXEC_PATH = '/usr/bin/'
 elif CROSS_TOOL == 'keil':
-	PLATFORM 	= 'armcc'
-	EXEC_PATH 	= 'C:/Keil'
+    PLATFORM = 'armcc'
+    EXEC_PATH = 'C:/Keil'
 elif CROSS_TOOL == 'iar':
-	PLATFORM 	= 'iar'
-	IAR_PATH 	= 'C:/Program Files/IAR Systems/Embedded Workbench 6.0 Evaluation'
+    PLATFORM = 'iar'
+    IAR_PATH = 'C:/Program Files/IAR Systems/Embedded Workbench 6.0 Evaluation'
 
 if os.getenv('RTT_EXEC_PATH'):
-	EXEC_PATH = os.getenv('RTT_EXEC_PATH')
+    EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
 BUILD = 'debug'
 STM32_TYPE = 'STM32F10X_CL'
@@ -42,7 +44,8 @@ if PLATFORM == 'gcc':
     DEVICE = ' -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections'
     CFLAGS = DEVICE
     AFLAGS = ' -c' + DEVICE + ' -x assembler-with-cpp'
-    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rtthread-stm32.map,-cref,-u,Reset_Handler -T stm32_rom.ld'
+    LFLAGS = DEVICE + \
+        ' -Wl,--gc-sections,-Map=rtthread-stm32.map,-cref,-u,Reset_Handler -T stm32_rom.ld'
 
     CPATH = ''
     LPATH = ''
@@ -93,30 +96,30 @@ elif PLATFORM == 'iar':
 
     CFLAGS = DEVICE
     CFLAGS += ' --diag_suppress Pa050'
-    CFLAGS += ' --no_cse' 
-    CFLAGS += ' --no_unroll' 
-    CFLAGS += ' --no_inline' 
-    CFLAGS += ' --no_code_motion' 
-    CFLAGS += ' --no_tbaa' 
-    CFLAGS += ' --no_clustering' 
-    CFLAGS += ' --no_scheduling' 
-    CFLAGS += ' --debug' 
-    CFLAGS += ' --endian=little' 
-    CFLAGS += ' --cpu=Cortex-M3' 
-    CFLAGS += ' -e' 
+    CFLAGS += ' --no_cse'
+    CFLAGS += ' --no_unroll'
+    CFLAGS += ' --no_inline'
+    CFLAGS += ' --no_code_motion'
+    CFLAGS += ' --no_tbaa'
+    CFLAGS += ' --no_clustering'
+    CFLAGS += ' --no_scheduling'
+    CFLAGS += ' --debug'
+    CFLAGS += ' --endian=little'
+    CFLAGS += ' --cpu=Cortex-M3'
+    CFLAGS += ' -e'
     CFLAGS += ' --fpu=None'
-    CFLAGS += ' --dlib_config "' + IAR_PATH + '/arm/INC/c/DLib_Config_Normal.h"'    
-    CFLAGS += ' -Ol'    
-        
+    CFLAGS += ' --dlib_config "' + IAR_PATH + '/arm/INC/c/DLib_Config_Normal.h"'
+    CFLAGS += ' -Ol'
+
     AFLAGS = ''
-    AFLAGS += ' -s+' 
-    AFLAGS += ' -w+' 
-    AFLAGS += ' -r' 
-    AFLAGS += ' --cpu Cortex-M3' 
-    AFLAGS += ' --fpu None' 
+    AFLAGS += ' -s+'
+    AFLAGS += ' -w+'
+    AFLAGS += ' -r'
+    AFLAGS += ' --cpu Cortex-M3'
+    AFLAGS += ' --fpu None'
 
     LFLAGS = ' --config stm32_rom.icf'
-    LFLAGS += ' --entry __iar_program_start'    
+    LFLAGS += ' --entry __iar_program_start'
 
     EXEC_PATH = IAR_PATH + '/arm/bin/'
     POST_ACTION = ''

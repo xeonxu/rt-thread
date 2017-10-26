@@ -223,7 +223,7 @@
 
 /* Network Utilities */
 
-#define RT_USING_DFS_WINSHAREDIR
+// #define RT_USING_DFS_WINSHAREDIR
 #include "rtconfig_project.h"
 
 #endif
