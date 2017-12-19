@@ -58,7 +58,7 @@ typedef	struct _types_fd_set {
 	fd_mask	fds_bits[howmany(FD_SETSIZE, NFDBITS)];
 } _types_fd_set;
 
-#define fd_set _types_fd_set
+// #define fd_set _types_fd_set
 
 #  define	FD_SET(n, p)	((p)->fds_bits[(n)/NFDBITS] |= (1L << ((n) % NFDBITS)))
 #  define	FD_CLR(n, p)	((p)->fds_bits[(n)/NFDBITS] &= ~(1L << ((n) % NFDBITS)))

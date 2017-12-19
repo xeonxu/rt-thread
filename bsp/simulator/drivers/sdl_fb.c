@@ -5,7 +5,7 @@
 #ifdef _WIN32
 #include <sdl.h>
 #else
-#include <SDL/SDL.h>
+#include <SDL/include/SDL.h>
 #endif
 #include <rtdevice.h>
 #include <rtgui/driver.h>
@@ -16,6 +16,10 @@
 extern void rt_hw_exit(void);
 
 #define SDL_SCREEN_FORMAT   SDL_PIXELFORMAT_RGB565
+
+#ifndef EXIT_FAILURE		/* define exit() codes if not provided */
+#define EXIT_FAILURE  1
+#endif
 
 struct sdlfb_device
 {
