@@ -98,6 +98,7 @@
 /* RT_USING_DFS_ROMFS is not set */
 /* RT_USING_DFS_RAMFS is not set */
 /* RT_USING_DFS_UFFS is not set */
+/* RT_USING_DFS_NFS is not set */
 
 /* Device Drivers */
 
@@ -137,22 +138,13 @@
 
 /* RT-Thread UI Engine */
 
-#define RT_USING_GUIENGINE
-#define RTGUI_NAME_MAX 16
-/* RTGUI_USING_TTF is not set */
-#define RTGUI_USING_FONT16
-#define RTGUI_USING_FONT12
-/* RTGUI_USING_FONTHZ is not set */
-/* RTGUI_IMAGE_XPM is not set */
-#define RTGUI_IMAGE_JPEG_NONE
+/* RT_USING_GUIENGINE is not set */
+/* RTGUI_IMAGE_JPEG_NONE is not set */
 /* RTGUI_IMAGE_JPEG is not set */
 /* RTGUI_IMAGE_TJPGD is not set */
 /* RTGUI_IMAGE_PNG_NONE is not set */
 /* RTGUI_IMAGE_PNG is not set */
-#define RTGUI_IMAGE_LODEPNG
-/* RTGUI_IMAGE_BMP is not set */
-#define RTGUI_IMAGE_CONTAINER
-#define RTGUI_USING_DEMO
+/* RTGUI_IMAGE_LODEPNG is not set */
 
 /* VBUS(Virtual Software BUS) */
 
@@ -162,67 +154,6 @@
 
 /* RT_USING_LOGTRACE is not set */
 /* RT_USING_RYM is not set */
-
-/* RT-Thread online packages */
-
-/* system packages */
-
-/* PKG_USING_PARTITION is not set */
-#define RT_USING_PERSIMMON_EXAMPLE
-/* PKG_USING_SQLITE is not set */
-/* PKG_USING_RTI is not set */
-
-/* IoT - internet of things */
-
-/* PKG_USING_PAHOMQTT is not set */
-/* PKG_USING_WEBCLIENT is not set */
-/* PKG_USING_MONGOOSE is not set */
-/* PKG_USING_WEBTERMINAL is not set */
-/* PKG_USING_CJSON is not set */
-/* PKG_USING_EZXML is not set */
-/* PKG_USING_NANOPB is not set */
-
-/* security packages */
-
-/* PKG_USING_MBEDTLS is not set */
-/* PKG_USING_libsodium is not set */
-/* PKG_USING_TINYCRYPT is not set */
-
-/* language packages */
-
-/* PKG_USING_JERRYSCRIPT is not set */
-/* PKG_USING_MICROPYTHON is not set */
-
-/* multimedia packages */
-
-/* PKG_USING_OPENMV is not set */
-
-/* tools packages */
-
-/* PKG_USING_CMBACKTRACE is not set */
-/* PKG_USING_EASYLOGGER is not set */
-/* PKG_USING_SYSTEMVIEW is not set */
-/* PKG_USING_IPERF is not set */
-
-/* miscellaneous packages */
-
-#define PKG_USING_FASTLZ
-/* PKG_USING_MINILZO is not set */
-
-/* example package: hello */
-
-/* PKG_USING_HELLO is not set */
-
-/* Privated Packages of RealThread */
-
-/* PKG_USING_CODEC is not set */
-/* PKG_USING_PLAYER is not set */
-#define PKG_USING_PERSIMMON_SRC
-/* PKG_USING_PERSIMMON_SRC_v1_0_0 is not set */
-#define PKG_USING_PERSIMMON_LATEST_VERSION
-
-/* Network Utilities */
-
 // #define RT_USING_DFS_WINSHAREDIR
 #include "rtconfig_project.h"
 
