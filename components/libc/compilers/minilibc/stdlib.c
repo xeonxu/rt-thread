@@ -76,4 +76,12 @@ void *calloc(size_t nelem, size_t elsize)
 }
 #endif
 
+#if defined (STM32_FAMILY)
+
+void __libc_init_array(void)
+{
+    /* we not use __libc init_aray to initialize C++ objects */
+}
+#endif
+
 #endif
