@@ -103,7 +103,7 @@
 
 /* POSIX layer and C standard library */
 
-#define RT_USING_LIBC
+/* RT_USING_LIBC is not set */
 /* RT_USING_PTHREADS is not set */
 
 /* Network stack */
@@ -191,6 +191,7 @@
 /* example package: hello */
 
 /* PKG_USING_HELLO is not set */
+#define STM32_FAMILY
 /* STM32F100RC is not set */
 /* STM32F100RD is not set */
 /* STM32F100RE is not set */
