@@ -137,7 +137,7 @@ int main(void)
                             thread_ledblink,
                             (void*)led_delay,
                             256,
-                            25,
+                            30,
                             1);
 
     if (tid_led != RT_NULL)

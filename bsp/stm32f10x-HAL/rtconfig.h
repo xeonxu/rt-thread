@@ -48,12 +48,13 @@
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
 #define RT_CONSOLE_DEVICE_NAME "uart1"
-/* RT_USING_MODULE is not set */
+#define RT_USING_MODULE
 
 /* RT-Thread Components */
 
 #define RT_USING_COMPONENTS_INIT
 #define RT_USING_USER_MAIN
+#define RT_MAIN_THREAD_STACK_SIZE 2048
 
 /* C++ features */
 
@@ -73,22 +74,50 @@
 /* FINSH_USING_AUTH is not set */
 #define FINSH_USING_MSH
 #define FINSH_USING_MSH_DEFAULT
-#define FINSH_USING_MSH_ONLY
+/* FINSH_USING_MSH_ONLY is not set */
 
 /* Device virtual file system */
 
-/* RT_USING_DFS is not set */
+#define RT_USING_DFS
+#define DFS_USING_WORKDIR
+#define DFS_FILESYSTEMS_MAX 2
+#define DFS_FILESYSTEM_TYPES_MAX 2
+#define DFS_FD_MAX 4
+#define RT_USING_DFS_ELMFAT
+
+/* elm-chan's FatFs, Generic FAT Filesystem Module */
+
+#define RT_DFS_ELM_CODE_PAGE 437
+#define RT_DFS_ELM_WORD_ACCESS
+#define RT_DFS_ELM_USE_LFN_0
+/* RT_DFS_ELM_USE_LFN_1 is not set */
+/* RT_DFS_ELM_USE_LFN_2 is not set */
+/* RT_DFS_ELM_USE_LFN_3 is not set */
+#define RT_DFS_ELM_USE_LFN 0
+#define RT_DFS_ELM_MAX_LFN 255
+#define RT_DFS_ELM_DRIVES 2
+#define RT_DFS_ELM_MAX_SECTOR_SIZE 512
+/* RT_DFS_ELM_USE_ERASE is not set */
+#define RT_DFS_ELM_REENTRANT
+#define RT_USING_DFS_DEVFS
+/* RT_USING_DFS_NET is not set */
+/* RT_USING_DFS_ROMFS is not set */
+/* RT_USING_DFS_RAMFS is not set */
+/* RT_USING_DFS_UFFS is not set */
+/* RT_USING_DFS_JFFS2 is not set */
+/* RT_USING_DFS_NFS is not set */
 
 /* Device Drivers */
 
 #define RT_USING_DEVICE_IPC
 #define RT_USING_SERIAL
-/* RT_USING_CAN is not set */
-/* RT_USING_HWTIMER is not set */
+#define RT_USING_CAN
+#define RT_CAN_USING_HDR
+#define RT_USING_HWTIMER
 /* RT_USING_CPUTIME is not set */
 /* RT_USING_I2C is not set */
 #define RT_USING_PIN
-/* RT_USING_MTD_NOR is not set */
+#define RT_USING_MTD_NOR
 /* RT_USING_MTD_NAND is not set */
 /* RT_USING_RTC is not set */
 /* RT_USING_SDIO is not set */
@@ -105,6 +134,7 @@
 
 /* RT_USING_LIBC is not set */
 /* RT_USING_PTHREADS is not set */
+/* HAVE_SYS_SIGNALS is not set */
 
 /* Network stack */
 
@@ -116,10 +146,6 @@
 
 /* RT_USING_MODBUS is not set */
 
-/* RT-Thread UI Engine */
-
-/* PKG_USING_GUIENGINE is not set */
-
 /* VBUS(Virtual Software BUS) */
 
 /* RT_USING_VBUS is not set */
@@ -127,7 +153,7 @@
 /* Utilities */
 
 /* RT_USING_LOGTRACE is not set */
-/* RT_USING_RYM is not set */
+#define RT_USING_RYM
 
 /* RT-Thread online packages */
 
@@ -135,7 +161,7 @@
 
 /* PKG_USING_PARTITION is not set */
 /* PKG_USING_SQLITE is not set */
-/* PKG_USING_RTI is not set */
+#define PKG_USING_RTI
 
 /* IoT - internet of things */
 
@@ -223,10 +249,10 @@
 /* STM32F102CB is not set */
 /* STM32F102RB is not set */
 /* STM32F103C8 is not set */
-/* STM32F103CB is not set */
+#define STM32F103CB
 /* STM32F103R8 is not set */
 /* STM32F103RB is not set */
-#define STM32F103RC
+/* STM32F103RC is not set */
 /* STM32F103RD is not set */
 /* STM32F103RE is not set */
 /* STM32F103RF is not set */
@@ -260,6 +286,5 @@
 #define RT_USING_UART1
 /* RT_USING_UART2 is not set */
 /* RT_USING_UART3 is not set */
-/* RT_USING_SDCARD is not set */
 
 #endif

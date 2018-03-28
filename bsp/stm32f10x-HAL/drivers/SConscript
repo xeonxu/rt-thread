@@ -20,6 +20,8 @@ if GetDepend(['RT_USING_USB_DEVICE']):
     src += ['drv_usb.c']
 if GetDepend(['RT_USING_SDCARD']):
     src += ['drv_sdcard.c']
+if GetDepend(['RT_USING_HWTIMER']):
+    src += ['drv_hwtimer.c']
 
 if rtconfig.CROSS_TOOL == 'gcc':
     src += ['gcc_startup.s']

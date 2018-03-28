@@ -1,31 +1,34 @@
 import os
 
 # toolchains options
-ARCH='arm'
-CPU='cortex-m3'
-CROSS_TOOL='gcc'
+ARCH = 'arm'
+CPU = 'cortex-m3'
+CROSS_TOOL = 'gcc'
 
 if os.getenv('RTT_CC'):
-	CROSS_TOOL = os.getenv('RTT_CC')
+    CROSS_TOOL = os.getenv('RTT_CC')
+if os.getenv('RTT_ROOT'):
+    RTT_ROOT = os.getenv('RTT_ROOT')
 
 
 # cross_tool provides the cross compiler
-# EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
+# EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil
+# MDK, IAR
 
-if  CROSS_TOOL == 'gcc':
-	PLATFORM 	= 'gcc'
-	EXEC_PATH 	= '/usr/local/gcc-arm-none-eabi-5_4-2016q3/bin/'
+if CROSS_TOOL == 'gcc':
+    PLATFORM = 'gcc'
+    EXEC_PATH = '/usr/local/gcc-arm-none-eabi-5_4-2016q3/bin/'
 elif CROSS_TOOL == 'keil':
-	PLATFORM 	= 'armcc'
-	EXEC_PATH 	= 'C:/Keilv5'
+    PLATFORM = 'armcc'
+    EXEC_PATH = 'C:/Keilv5'
 elif CROSS_TOOL == 'iar':
-	PLATFORM 	= 'iar'
-	IAR_PATH 	= 'C:/Program Files/IAR Systems/Embedded Workbench 6.0 Evaluation'
+    PLATFORM = 'iar'
+    IAR_PATH = 'C:/Program Files/IAR Systems/Embedded Workbench 6.0 Evaluation'
 
 if os.getenv('RTT_EXEC_PATH'):
-	EXEC_PATH = os.getenv('RTT_EXEC_PATH')
+    EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
-BUILD = 'debug'
+BUILD = ''
 
 if PLATFORM == 'gcc':
     # toolchains
@@ -33,6 +36,7 @@ if PLATFORM == 'gcc':
     CC = PREFIX + 'gcc'
     AS = PREFIX + 'gcc'
     AR = PREFIX + 'ar'
+    CXX = PREFIX + 'g++'
     LINK = PREFIX + 'gcc'
     TARGET_EXT = 'elf'
     SIZE = PREFIX + 'size'
@@ -42,7 +46,8 @@ if PLATFORM == 'gcc':
     DEVICE = ' -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections'
     CFLAGS = DEVICE
     AFLAGS = ' -c' + DEVICE + ' -x assembler-with-cpp'
-    LFLAGS = DEVICE + ' -Wl,--gc-sections,-Map=rtthread-stm32.map,-cref,-u,Reset_Handler -T stm32_rom.ld'
+    LFLAGS = DEVICE + \
+        ' -Wl,--gc-sections,-Map=rtthread-stm32.map,-cref,-u,Reset_Handler -T stm32_rom.ld'
 
     CPATH = ''
     LPATH = ''
@@ -54,6 +59,9 @@ if PLATFORM == 'gcc':
         CFLAGS += ' -O2'
 
     POST_ACTION = OBJCPY + ' -O binary $TARGET rtthread.bin\n' + SIZE + ' $TARGET \n'
+
+    M_CFLAGS = CFLAGS + ' -mlong-calls  -Dsourcerygxx -O0 -fPIC '
+    M_LFLAGS = DEVICE + ' -Wl,-z,max-page-size=0x4 -shared -fPIC -e main -nostdlib'
 
 elif PLATFORM == 'armcc':
     # toolchains
@@ -94,33 +102,33 @@ elif PLATFORM == 'iar':
 
     CFLAGS = DEVICE
     CFLAGS += ' --diag_suppress Pa050'
-    CFLAGS += ' --no_cse' 
-    CFLAGS += ' --no_unroll' 
-    CFLAGS += ' --no_inline' 
-    CFLAGS += ' --no_code_motion' 
-    CFLAGS += ' --no_tbaa' 
-    CFLAGS += ' --no_clustering' 
-    CFLAGS += ' --no_scheduling' 
-    CFLAGS += ' --debug' 
-    CFLAGS += ' --endian=little' 
-    CFLAGS += ' --cpu=Cortex-M3' 
-    CFLAGS += ' -e' 
+    CFLAGS += ' --no_cse'
+    CFLAGS += ' --no_unroll'
+    CFLAGS += ' --no_inline'
+    CFLAGS += ' --no_code_motion'
+    CFLAGS += ' --no_tbaa'
+    CFLAGS += ' --no_clustering'
+    CFLAGS += ' --no_scheduling'
+    CFLAGS += ' --debug'
+    CFLAGS += ' --endian=little'
+    CFLAGS += ' --cpu=Cortex-M3'
+    CFLAGS += ' -e'
     CFLAGS += ' --fpu=None'
-    CFLAGS += ' --dlib_config "' + IAR_PATH + '/arm/INC/c/DLib_Config_Normal.h"'    
-    CFLAGS += ' -Ol'    
+    CFLAGS += ' --dlib_config "' + IAR_PATH + '/arm/INC/c/DLib_Config_Normal.h"'
+    CFLAGS += ' -Ol'
     CFLAGS += ' --use_c++_inline'
-        
+
     AFLAGS = ''
-    AFLAGS += ' -s+' 
-    AFLAGS += ' -w+' 
-    AFLAGS += ' -r' 
-    AFLAGS += ' --cpu Cortex-M3' 
-    AFLAGS += ' --fpu None' 
+    AFLAGS += ' -s+'
+    AFLAGS += ' -w+'
+    AFLAGS += ' -r'
+    AFLAGS += ' --cpu Cortex-M3'
+    AFLAGS += ' --fpu None'
 
     LFLAGS = ' --config stm32f10x_flash.icf'
-    LFLAGS += ' --redirect _Printf=_PrintfTiny' 
-    LFLAGS += ' --redirect _Scanf=_ScanfSmall' 
-    LFLAGS += ' --entry __iar_program_start'    
+    LFLAGS += ' --redirect _Printf=_PrintfTiny'
+    LFLAGS += ' --redirect _Scanf=_ScanfSmall'
+    LFLAGS += ' --entry __iar_program_start'
 
     EXEC_PATH = IAR_PATH + '/arm/bin/'
     POST_ACTION = ''

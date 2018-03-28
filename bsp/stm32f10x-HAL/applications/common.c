@@ -66,7 +66,7 @@ void reset_distance(void)
 
 rt_uint32_t get_distance(void)
 {
-
     HAL_TIM_Base_Stop_IT(&htim3);
+
     return 0.17 * (count * 1000 + htim3.Instance->CNT);
 }
