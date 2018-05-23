@@ -43,6 +43,10 @@ if GetDepend('PKG_USING_GUIENGINE'):
 if GetDepend('RT_USING_WDT'):
     src += ['stm32f1_wdg.c']
 
+# add hwtimer
+if GetDepend(['RT_USING_HWTIMER']):
+    src += ['drv_hwtimer.c']
+
 CPPPATH = [cwd]
 
 group = DefineGroup('Drivers', src, depend = [''], CPPPATH = CPPPATH)

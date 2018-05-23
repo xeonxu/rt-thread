@@ -11,6 +11,8 @@ startup.c
 
 if GetDepend('RT_USING_CAN'):
     src += ['canapp.c']
+if GetDepend('RT_USING_HWTIMER'):
+    src += ['hwtimer_test.c']
 
 CPPPATH = [cwd, str(Dir('#'))]
 
